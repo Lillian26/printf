@@ -56,7 +56,7 @@ int _printf(const char *format, ...)
 			printed_chrs += printed;
 		}
 	}
-	printed_buffer(buffer, &buff_ind);
+	print_buffer(buffer, &buff_ind);
 	va_end(list);
-	return (printed chars);
+	return (printed_chars);
 }

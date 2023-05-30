@@ -65,8 +65,8 @@ int write_number(int is_negative, int ind, char buffer[],
 		extra_ch = '-';
 	else if (flags & F_PLUS)
 		extra_ch = '+';
-	else if (flasgs & F_SPACE)
-		extra_ch = '';
+	else if (flags & F_SPACE)
+		extra_ch = ' ';
 	return (write_num(ind, buffer, flags, width, precision,
 		length, padd, extra_ch));
 }
@@ -92,9 +92,9 @@ int write_num(int ind, char buffer[], int flags,
 	if (prec == 0 && ind == BUFF_SIZE - 2 && buffer[ind] == '0' && width == 0)
 		return (0);
 	if (prec == 0 && ind == BUFF_SIZE - 2 && buffer[ind] == '0')
-		buffer[ind] = padd = '';
+		buffer[ind] = padd = ' ';
 	if (prec > 0 && prec < length)
-		padd = '';
+		padd = ' ';
 	while (prec > length)
 		buffer[--ind] = '0', length++;
 	if (extra_c != 0)
@@ -145,14 +145,14 @@ int write_unsgnd(int is_negative, int ind, char buffer[],
 	int flags, int width, int precision, int size)
 {
 	int length = BUFF_SIZE - ind - 1, i = 0;
-	char padd = '';
+	char padd = ' ';
 
 	UNUSED(is_negative);
 	UNUSED(size);
 	if (precision == 0 && ind == BUFF_SIZE - 2 && buffer[ind] == '0')
 		return (0);
 	if (precision > 0 && precision < length)
-		padd = '';
+		padd = ' ';
 	while (precision > length)
 	{
 		buffer[--ind] = '0';
@@ -200,7 +200,7 @@ int write_pointer(char buffer[], int ind, int length,
 		for (i = 3; i < width - length + 3; i++)
 			buffer[i] = padd;
 		buffer[i] = '\0';
-		if (flags & F_MINUS && padd == '')
+		if (flags & F_MINUS && padd == ' ')
 		{
 
 			buffer[--ind] = 'x';
@@ -209,7 +209,7 @@ int write_pointer(char buffer[], int ind, int length,
 				buffer[--ind] = extra_c;
 			return (write(1, &buffer[ind], length) + write(1, &buffer[3], i - 3));
 		}
-		else if (!(flags & F_MINUS) && padd == '')
+		else if (!(flags & F_MINUS) && padd == ' ')
 		{
 			buffer[--ind] = 'x';
 			buffer[--ind] = '0';
